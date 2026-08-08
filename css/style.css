@@ -239,8 +239,8 @@ img { max-width: 100%; height: auto; display: block; }
   inset: 0;
   background-image: url('../images/pg_hero_band.jpg');
   background-size: cover;
-  background-position: center center;
-  filter: brightness(0.45) saturate(0.2) contrast(1.1);
+  background-position: center 30%;
+  filter: brightness(0.5) saturate(0.15) contrast(1.05);
   z-index: 0;
   transition: opacity 0.8s ease;
 }
