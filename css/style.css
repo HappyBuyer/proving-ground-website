@@ -211,21 +211,74 @@ img { max-width: 100%; height: auto; display: block; }
   text-align: center;
 }
 
+/* YouTube video background */
+.hero-video-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.hero-video-wrap iframe,
+.hero-video-wrap #yt-player {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 177.78vh;  /* 16:9 aspect ratio */
+  height: 56.25vw;
+  min-width: 100%;
+  min-height: 100%;
+  transform: translate(-50%, -50%);
+  filter: brightness(0.45) saturate(0.3) contrast(1.1);
+}
+
+/* Static fallback image (shown on iOS or while video loads) */
 .hero-bg {
   position: absolute;
   inset: 0;
   background-image: url('../images/pg_hero_band.jpg');
   background-size: cover;
   background-position: center center;
-  background-attachment: fixed;
   filter: brightness(0.45) saturate(0.2) contrast(1.1);
-  transform: scale(1.05);
-  transition: transform 0.1s linear;
+  z-index: 0;
+  transition: opacity 0.8s ease;
+}
+
+.hero-bg-fallback {
+  opacity: 1;
+}
+
+/* Unmute button */
+.hero-unmute-btn {
+  position: absolute;
+  bottom: 90px;
+  right: 24px;
+  z-index: 10;
+  background: rgba(10, 12, 16, 0.6);
+  border: 1px solid rgba(212, 175, 55, 0.5);
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--color-text);
+  transition: background var(--transition), border-color var(--transition), transform 0.15s ease;
+  backdrop-filter: blur(4px);
+}
+
+.hero-unmute-btn:hover {
+  background: rgba(212, 175, 55, 0.2);
+  border-color: var(--color-primary);
+  transform: scale(1.1);
 }
 
 .hero-overlay {
   position: absolute;
   inset: 0;
+  z-index: 1;
   background: linear-gradient(
     to bottom,
     rgba(10, 12, 16, 0.15) 0%,
@@ -237,7 +290,7 @@ img { max-width: 100%; height: auto; display: block; }
 
 .hero-content {
   position: relative;
-  z-index: 2;
+  z-index: 3;
   padding: 0 24px 80px;
   max-width: 900px;
   margin-top: auto;  /* push content to bottom */
