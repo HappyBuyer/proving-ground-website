@@ -206,19 +206,7 @@ img { max-width: 100%; height: auto; display: block; }
     filter: brightness(0.52) saturate(0.1) contrast(1.05);
   }
 
-  /* On mobile: disable YouTube video, always show static photo */
-  .hero-video-wrap {
-    display: none !important;
-  }
-
-  .hero-bg-fallback {
-    opacity: 1 !important;
-  }
-
-  /* Hide unmute button on mobile (no video) */
-  .hero-unmute-btn {
-    display: none !important;
-  }
+  /* Video and unmute button handled by JS (iOS detection) — not disabled via CSS */
 
   /* Tighten hero text for mobile */
   .hero-content {

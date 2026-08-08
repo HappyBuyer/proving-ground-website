@@ -866,19 +866,21 @@
 
   <!-- YouTube IFrame API for video hero -->
   <script>
-    // Only load YouTube player on non-iOS devices
-    var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    // Block video ONLY on iOS Safari (iPhone/iPad) — Android and all other browsers get the video
+    var ua = navigator.userAgent;
+    var isIOS = (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) ||
+                (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1); // iPad OS 13+
     var ytPlayer;
     var isMuted = true;
 
     if (!isIOS) {
-      // Load YouTube IFrame API
+      // Load YouTube IFrame API for all non-iOS devices (Android, desktop, etc.)
       var tag = document.createElement('script');
       tag.src = 'https://www.youtube.com/iframe_api';
       var firstScriptTag = document.getElementsByTagName('script')[0];
       firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
     } else {
-      // iOS fallback: hide video wrap, show static bg
+      // iOS Safari fallback: show static band photo, hide video + unmute button
       document.querySelector('.hero-video-wrap').style.display = 'none';
       document.querySelector('.hero-bg-fallback').style.opacity = '1';
       document.getElementById('unmuteBtn').style.display = 'none';
