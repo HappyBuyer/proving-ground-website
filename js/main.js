@@ -108,31 +108,20 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   // ── Contact form ────────────────────────────────────────────
+  // Form submissions are handled by FormSubmit. Only show the success
+  // state after FormSubmit redirects back with ?sent=1.
   const bookingForm = document.getElementById('bookingForm');
-  if (bookingForm) {
-    bookingForm.addEventListener('submit', function (e) {
-      e.preventDefault();
+  const successMsg = document.querySelector('.form-success');
+  const params = new URLSearchParams(window.location.search);
 
-      const formData = new FormData(bookingForm);
-      const name    = formData.get('name') || '';
-      const email   = formData.get('email') || '';
-      const subject = formData.get('subject') || 'Booking Inquiry';
-      const message = formData.get('message') || '';
+  if (bookingForm && successMsg && params.get('sent') === '1') {
+    bookingForm.style.display = 'none';
+    successMsg.style.display = 'block';
 
-      const mailtoBody = encodeURIComponent(
-        `Name: ${name}\nEmail: ${email}\n\n${message}`
-      );
-      const mailtoLink = `mailto:provingground901@gmail.com?subject=${encodeURIComponent(subject)}&body=${mailtoBody}`;
-
-      window.location.href = mailtoLink;
-
-      // Show success message
-      const successMsg = document.querySelector('.form-success');
-      if (successMsg) {
-        bookingForm.style.display = 'none';
-        successMsg.style.display = 'block';
-      }
-    });
+    // Remove the query string from the address bar after the success state loads.
+    if (window.history && window.history.replaceState) {
+      window.history.replaceState({}, document.title, window.location.pathname + '#booking');
+    }
   }
 
   // ── Smooth scroll for anchor links ─────────────────────────
