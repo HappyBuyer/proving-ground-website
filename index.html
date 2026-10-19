@@ -733,7 +733,11 @@
         <div class="fade-in fade-in-delay-2">
           <div class="booking-form">
             <h3>Send a Booking Inquiry</h3>
-            <form id="bookingForm" novalidate>
+            <form id="bookingForm" action="https://formsubmit.co/provingground901@gmail.com" method="POST">
+              <input type="hidden" name="_subject" value="New Proving Ground Booking Inquiry">
+              <input type="hidden" name="_template" value="table">
+              <input type="hidden" name="_next" value="https://www.provingground901.com/?sent=1#booking">
+              <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
               <div class="form-group">
                 <label for="name">Your Name</label>
                 <input type="text" id="name" name="name" placeholder="Jane Smith" required autocomplete="name">
@@ -759,7 +763,7 @@
               <button type="submit" class="form-submit">Send Inquiry</button>
             </form>
             <div class="form-success" aria-live="polite">
-              Your email app should open now. Please send the message there to complete your inquiry.
+              ✓ Thanks! Your booking inquiry was sent to Proving Ground. We’ll be in touch soon.
             </div>
           </div>
         </div>
